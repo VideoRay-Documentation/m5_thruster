@@ -1,0 +1,44 @@
+<h1>Commands and Responses</h1>
+
+<p>The motor controller firmware also supports custom commands that allow for the instantaneous setting of multiple controllers on a party line comms bus.</p>
+
+<h2>PROPULSION_COMMAND: <span class="folder">0xaa</span></h2>
+
+<p>The propulsion command is an application custom command which is sent as a write request to CSR address 0xF0 (the custom command register.  It has the following data payload format:</p>
+
+<ul style="list-style: none;">
+  <li class="folder">0xAA R_ID THRUST_0 THRUST_1 THRUST_2 ... THRUST_N</li>
+  </ul>
+
+<p>Where:</p>
+
+<ul>
+  <li><span class="folder">0xAA</span> is the command byte</li>
+  <li><span class="folder">R_ID</span> is the NODE ID of the thruster to respond with data</li>
+  <li><span class="folder">THRUST_X</span> is the thruster power value (-1 to 1) for the thruster with motor id X</li>
+  </ul>
+
+<p>Typically this is sent as a group multicast to address <span class="folder">0x81</span> which is reserved for thrusters.</p>
+
+<h2>RESPONSE_THRUSTER_STANDARD: <span class="folder">0x02</span></h2>
+
+<p>The standard thruster response is typically used in conjunction with the multicast PROPULSION COMMAND to retrieve data from each thruster in the system in a round robin fashion.</p>
+
+<p>When the FLAG byte is set to <span class="folder">0x02</span> the RESPONSE_THRUSTER_STANDARD data payload is sent.</p>
+
+<p>The format of this payload is defined by the following structure:</p>
+
+<p class="folder">Response_Thruster_Standard {<br />
+&nbsp; &nbsp; /** Measured shaft rotational velocity */<br />
+&nbsp; &nbsp; float rpm;<br />
+&nbsp; &nbsp; /** Bus voltage (Volts) */<br />
+&nbsp; &nbsp; float bus_v;<br />
+&nbsp; &nbsp; /** Bus current (Amps) */<br />
+&nbsp; &nbsp; float bus_i;<br />
+&nbsp; &nbsp; /** Temperature (Degree C) */<br />
+&nbsp; &nbsp; float temp;<br />
+&nbsp; &nbsp; /** fault flags */<br />
+&nbsp; &nbsp; uint8_t fault;<br />
+}</p>
+
+<p>Please see the <a href="../../m5_thruster/html/thruster_py.html">example thruster.py</a> for an illustration of how to use the PROPULSION_COMMAND and parse the RESPONSE_THRUSTERS_STANDARD response packet.</p>

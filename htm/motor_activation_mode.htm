@@ -1,0 +1,25 @@
+<h1>Motor Activation Mode</h1>
+
+<p>When the motor controller enters diagnostic mode it will go directly to motor actuation mode.  In motor actuation mode the motor can be directly controlled by key presses in the terminal window.</p>
+
+<p>The diagnostic menu illustrates the keys which can be used actuate the motor.</p>
+
+<p class="folder">Diagnostics:<br />
+=: Increase motor (0.1%) increments<br />
+-: Decrease motor (0.1%) increments<br />
+0-9: Set motor direct (10% increments)<br />
+Shift + 0-9: Set motor direct reverse (10% increments)<br />
+r: Reset motor control algorithm state<br />
+' ': Print data (space)<br />
+c: Configuration<br />
+d: Dump runtime log<br />
+?: Print this menu<br />
+x: Exit diagnostic mode<br />
+
+<p>Notes:</p>
+
+<ul>
+  <li>Pressing "x" will exit diagnostic mode.  After exiting, diagnostic mode can be re-entered within 5 seconds by pressing "+++++" (5 plus signs).</li>
+  <li>Pressing "c" will bring up the configuration menu.</li>
+  <li>Actuation is immediate on each keypress, i.e. the "Enter" key does not have to be pressed after the desired command input.</li>
+  </ul>

@@ -1,0 +1,31 @@
+<h1>Updating Firmware on M5 Modules</h1>
+
+<p>Quick Steps for manual updating a single module:</p>
+
+<ol>
+  <li>Download vr_refresh if needed from ftp.videoray.com</li>
+  <li>Download new firmware for the module from ftp.videoray.com</li>
+  <li>Connect the serial power to the module.  Do NOT power on the module yet.</li>
+  <li>Run vr_refresh with a command line similar to "vr_refresh -c COM7 firmware-1.0.0.hex"</li>
+  <li>Apply power to the module.</li>
+  <li>It should start the download process.  If not, or if any errors during download, repeat steps 3-5.</li>
+  </ol>
+
+<h2>Downloading Firmware and Tools</h2>
+
+<p>All M5 software is distributed via the <a href="http://ftp.videoray.com/" target="_blank">VideoRay FTP server</a> (<a href="http://ftp.videoray.com/" target="_blank">http://ftp.videoray.com/</a>) using the following credentials:</p>
+
+<ul style="list-style: none;">
+  <li><b>Username</b>: <span class="folder">quarterdeck</span></li>
+  <li><b>Password</b>: <span class="folder">quarterdeck</span></li>
+  </ul>
+
+<p><img src="../../required/images/icon_note.gif"> Note the use of http://, not ftp:// in the server URL above.
+
+<p>The firmware is located in the <span class="folder">./firmware</span> directory.</p>
+
+<p>Tools (such as vr_refresh) are located in the <span class="folder">./windows_tools</span> directory or <span class="folder">./ubuntu_tools</span> directory depending upon what OS you are using.</p>
+
+<p>At a minimum the firmware for the module and the appropriate vr_referesh application are required to update the firmware on a module</p>
+
+<p><img src="../../required/images/icon_note.gif"> Instructions for <a href="../../m5_thruster/html/using_vr_refresh.html">using vr_refresh</a> are included in the next section.</p>

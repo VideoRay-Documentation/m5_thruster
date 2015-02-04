@@ -1,0 +1,9 @@
+<h1>Diagnostic / Test Mode</h1>
+
+<p>Diagnostic mode is a simple ASCII terminal user interface that allows interaction with the motor controller electronics without requiring any additional topside software other than a serial terminal (such as <a href="http://ttssh2.sourceforge.jp/" target="_blank">Tera Term</a>).</p>
+
+<p>To enter Diagnostic mode, input "+++++" (5 pluses) within 5 seconds after power up.  If 5 seconds have elapsed, or any <span class="folder">vrcsr</span> packets have been received, diagnostic mode will be locked out until the next power cycle.</p>
+
+<p>Diagnostic mode includes Motor Activation Mode and Configuration Mode.  These modes are described in the following sections.</p>
+
+<p><img src="../../required/images/icon_note.gif"> Since diagnostic mode is a simple ASCII terminal it is not appropriate for multiparty communications.</p>

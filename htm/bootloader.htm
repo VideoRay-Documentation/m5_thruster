@@ -1,0 +1,32 @@
+<h1>Bootloader Operation</h1>
+
+<p>The bootloader runs on the module upon power up.  The module will remain in the bootloader for 1 second waiting for a command to remain in the bootloader.  If no command is received and the module has a valid application firmware loaded then the module will run the application firmware.  If the "remain in bootloader" command is received or if there is no valid application firmware the module will remain in the bootloader.</p>
+
+<p><img src="../../required/images/icon_note.gif">The module must have the bootloader running.  The primary mechanism of installing the bootloader on the module is via JTAG (Joint Test Action Group).  If you require provisioning a module with a bootloader, please see the appropriate documentation.</p>
+
+<h2>Bootloader LED Blink Patterns</h2>
+
+<p>The bootloader blinks the module status LED to indicate its operational state.</p>
+
+<ul>
+  <li><p></p><b>Start-up Blink (3 blinks)</b>: The bootloader will blink 3 blinks (100ms ON, 200 ms OFF) on startup.</li>
+  <li><p></p><b>Active Blink (fast 5 times a second continuous)</b>: The status led will rapidly blink (5 times a second) while running in the bootloader.  The blink will remain continuously active until the module leaves the bootloader.</li>
+  <li><p></p><b>Command reception blink (fast 5 times a second continuous)</b>: The status led will rapidly blink (5 times a second) while running in the bootloader.  The blink will remain active while the module is in the bootloader.</li>
+  </ul>
+
+<p>Typical blink startup pattern will be:</p>
+
+<p>3 blinks, followed by 1 second of rapid blinks, followed by the application firmware blink pattern.  If there is no valid application, the pattern will be 3 blinks, followed by continuous rapid blinks.</p>
+  
+<h2>Verification of Bootloader Operation via a Terminal</h2>
+
+<p>The bootloader emits an identifying message on startup.  Part of the message is ASCII and thus human readable.  This provides a method to insure that the bootloader is loaded on the module.</p>
+
+<p>Connect a terminal emulator (such as tera term or putty) to the serial port connected to the module.  The terminal should be set to 115200, 8n1.</p>
+
+<p>Upon power up of the module the terminal will display the received characters.  The display will look similar to the image below.  If the text "BOOT" is visible then it is most likely that the bootloader is on the module.</p>
+
+<p><img src="../../m5_thruster/images/terminal_example.png">
+
+<p>ASCII terminal display showing bootloader message as well as text banner from a module application firmware (LED Controller).  "BOOT" is highlighted in yellow, and the firmware message is highlighted in green.</p>
+

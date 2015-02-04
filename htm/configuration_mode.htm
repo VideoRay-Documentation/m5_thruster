@@ -1,0 +1,80 @@
+<h1>Configuration Mode</h1>
+
+<p>The diagnostic configuration menu allows for various operating parameters to be set.  The parameters can also be saved in non-volatile storage.</p>
+
+<p>The diagnostic configuration menu displays the motor controller serial number as well as the firmware versions number and firmware inception date.</p>
+
+</p>In diagnostic configuration mode the "Enter" key must be hit after each command input.</p>
+
+<p>Primary Configuration Commands:</p>
+
+<ul>
+  <li>Pressing "x" followed by "Enter" will exit diagnostic configuration mode and return to the diagnostic menu.</li>
+  <li>Pressing "s" followed by "Enter" will save the current parameters in non-volatile memory.</li>
+  <li>Pressing "f" followed by "Enter" will reset the all parameters to their hardcoded factory defaults.</li>
+  </ul>
+
+<p>Entering a number followed by "Enter" will prompt for a new setting for the configuration parameter.  If "Enter" is pressed before a new value has been entered the current value will remain.</p>
+
+<p>Motor Controller:  THR0006<br />
+SW Version:  0.8.3 Dec 1, 2014 09:38:00</p>
+
+
+<table>
+<tr><th>Command</th><th>Function</th><th>Default Value</th><th>Description</th></tr>
+<tr><td>1</td><td>Motor control flags</td><td>0x0</td><td>The motor control flags are a bitfield that sets binary operation parameters.
+<p>Currently defined:</p>
+  <ul style="list-style: none;">
+    <li class="folder">CONTROL_FLAG_REVERSE_ROTATION (1 << 0)</li> 
+    <li>When set, reverses the rotation of the motor.</li>
+    </ul>
+</td></tr>
+<tr><td>2</td><td>Motor poles</td><td>14</td><td>Defines the number of poles in the attached motor.</td></tr>
+<tr><td>3</td><td>PWM deadband</td><td>32</td><td>Defines the time that band that insures that the motor driving FETs are off.  This prevents both the high and low driving complementary FETs to be on at the same time.  Units are in processor cycles.</td></tr>
+<tr><td>4</td><td>Commutation threshold</td><td>0.100000</td><td>This defines the trigger level at which the commutation algorithm determines it is time to commutate the motor.</td></tr>
+<tr><td>5</td><td>Commutation loss timeout</td><td>100</td><td>If the time between detected commutations is greater than this value, in mS, then the algorithm will assume the motor is stalled and reset the commutation algorithm and switch to open loop startup mode.</td></tr>
+<tr><td>6</td><td>Startup duty cycle</td><td>0.040000</td><td>The duty cycle that will be used to power the motor when in initial open-loop startup mode.</td></tr>
+<tr><td>7</td><td>Startup initial RPM</td><td>80</td><td>The initial startup RPM that will be used when the motor is in initial open-loop startup mode.  The algorithm will attempt to commutate at this RPM using the Startup Duty Cycle PWM.  The open loop phase will ramp up from this RPM to the startup end RPM at a rate defined by the Ramp Startup time.</td></tr>
+<tr><td>8</td><td>Startup final RPM</td><td>100</td><td>he ending startup RPM that will be used when the motor is in initial open-loop startup mode.  The algorithm will attempt to commutate at this RPM using the Startup Duty Cycle PWM.  The open loop phase will ramp up to this RPM from  the startup initial RPM at a rate defined by the Ramp Startup time.</td></tr>
+<tr><td>9</td><td>Startup duration</td><td>50.000000</td><td>This parameter defines the duration required to ramp from startup initial RPM to startup end RPM. This value is in units of ????</td></tr>
+<tr><td>10</td><td>Negative deadband</td><td>-0.020000</td><td>This defines the largest (closest to 0) negative value that can be set as a motor thruster setpoint.  It is assumed that due to stiction the motor will not spin at power levels closer to 0 than this.</td></tr>
+<tr><td>11</td><td>Positive deadband</td><td>0.020000</td><td>This defines the smallest positive (closest to 0) value that can be set as a motor thruster setpoint.  It is assumed that due to stiction the motor will not spin at power levels closer to 0 than this.</td></tr>
+<tr><td>12</td><td>Negative duty cycle limit</td><td>-0.990000</td><td>This value is the limit in the negative direction of applicable power to the motor.  The command setpoint will never be less than this value.</td></tr>
+<tr><td>13</td><td>Positive duty cycle limit</td><td>0.990000</td><td>This value is the limit in the positive direction of applicable power to the motor.  The command setpoint will never be greater than this value.</td></tr>
+<tr><td>14</td><td>Acceleration rate</td><td>0.000050</td><td>This value defines the rate at which the motor will change from the current power setpoint to the target setpoint.  This value defines the rate when the absolute value of the target setpoint is larger than the current setpoint. The units of this value are change in normalized power per mS.</td></tr>
+<tr><td>15</td><td>Deceleration rate</td><td>0.000050</td><td>This value defines the rate at which the motor will change from the current power setpoint to the target setpoint.  This value defines the rate when absolute value of the target setpoint is less than the current setpoint. The units of this value are change in normalized power per mS.</td></tr>
+<tr><td>16</td><td>Power manager threshold</td><td>200.000000</td><td>This actively limits the power that the thruster will use.  The default is 200W.</td></tr>
+<tr><td>17</td><td>Fault control</td><td>0x0</td><td>This is a bit-field mask is used to enable or disable the de-energizeing of the motor on the detection of a fault.  Faults will still be detected, but if the bit field is cleared the controller will not de-energize on that specific fault condition.
+<p>Current fault conditions are defined as:</p>
+  <ul style="list-style: none;" class="folder">
+    <li>FAULT_UNDERVOLT  (1<<0)</li>
+    <li>FAULT_OVERRVOLT  (1<<1)</li>
+    <li>FAULT_OVERCURRENT(1<<2)</li>
+    <li>FAULT_OVERTEMP(1<<3)</li>
+    <li>FAULT_STALL(1<<4)</li>
+    <li>FAULT_STALL_WARN (1<<5)</li>
+    </ul>
+  </li></td></tr>
+<tr><td>18</td><td>Minimum voltage</td><td>19.200001</td><td>Sets the undervoltage fault trip point in Volts.</td></tr>
+<tr><td>19</td><td>Max bus voltage</td><td>50.000000</td><td>Sets the over voltage fault trip point in Volts.</td></tr>
+<tr><td>20</td><td>Max current</td><td>20.000000</td><td>Sets the overcurrent fault trip point in Amps.</td></tr>
+<tr><td>21</td><td>Max temperature</td><td>100.000000</td><td>Sets the overtemp fault trip point in degrees Celsius.</td></tr>
+<tr><td>22</td><td>Max stall count</td><td>100</td><td>Sets the threshold for the number of stall event detections at which to declare a fault.</td></tr>
+<tr><td>23</td><td>Node Id</td><td>2</td><td>This is the communication protocol network node id.  This is used to designate this device on a multiparty RS-485 communication network.  A module will accept a packet which is addressed to its node ID, Group ID, or uses the broadcast ID.</td></tr>
+<tr><td>24</td><td>Group Id</td><td>129</td><td>This is the communication protocol network group id. This is used to designate a group of device on a multiparty RS-485 communication network.  A module will accept a packet which is addressed to its node ID, Group ID, or uses the broadcast ID.</td></tr>
+<tr><td>25</td><td>Motor Id</td><td>0</td><td>This is the motor controller ID.  This associates a motor with a specific datum in the motor controller propulsion command.  Modules with the same motor ID will all use the same set point when sent an acceptable propulsion command.</td></tr>
+<tr><td>26</td><td>System control flags</td><td>1</td><td>The motor control flags are a bitfield that sets binary operation parameters.
+<p>Currently defined:</p>
+  <ul style="list-style: none;" class="folder">
+    <li>ENABLE_LOSS_OF_COMMS_TIMOUT (1 << 0)</li>
+    <li>DISABLE_STARTUP_TONES (1<<1)</li>
+    </ul>
+<p>When set the controller will set the power setpoint to 0 if communications have been lossed for 1 second.Clearing this flag allows for a greatly reduced communications bandwidth.  However the motor will continue to spin even if communications have been lost.</p></td></tr>
+<tr><td>27</td><td>Fault interlock</td><td>0</td><td>This value must be set to the proper password to allow the faults control mask to be changed.
+The password is <span class="folder">0xdeadbeef</span></td></tr>
+<tr><td>f</td><td>Reset</td><td>n/a</td><td>Reset parameters to factory default.</td></tr>
+<tr><td>s</td><td>Save</td><td>n/a</td><td>Save parameters.</td></tr>
+<tr><td>x</td><td>Exit</td><td>n/a</td><td>Exit configuration mode.</td></tr>
+</table>
+
+<p></p>

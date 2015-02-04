@@ -1,0 +1,108 @@
+<h1>Using vr_refresh</h1>
+
+<p>The vr_refresh tool is a standalone command line application that can be used to update the firmware on a module.  There are no dependencies for vr_refresh.</p>
+
+<p>Usage: <span class="folder">vr_refresh [OPTIONS] [SINGLE_HEX_FILE_NAME]</span></p>
+
+<p><img src="../../required/images/icon_note.gif"> Do not include the brackets [ &nbsp; ].
+
+<table>
+<tr><th>OPTION</th><th>Description</th></tr>
+<tr><td>-? [ --help ]</td><td>show the help message</td></tr>
+<tr><td>--version</td><td>show version</td></tr>
+<tr><td>-c [ --com ] <i>arg</i></td><td>set com port name (=/dev/ttyUSB0)</td></tr>
+<tr><td>-i [ --id ] <i>arg</i></td><td>node ID, 255 for broadcast (=255)</td></tr>
+<tr><td>--sn <i>arg</i></td><td>serial number (=any)</td></tr>
+<tr><td>--block_size <i>arg</i></td><td>         flash block size (=1024)</td></tr>
+<tr><td>-d [ --dir ] <i>arg</i></td><td>set firmware directory, not used if an input file is specified </td></tr>
+<tr><td>-q [ --quite ]</td><td>do not send check active command</td></tr>
+<tr><td>-v [ --verbose ]</td><td>output verbose diagnostics</td></tr>
+<tr><td>-r [ --RESET ]</td><td>reset device upon completion</td></tr>
+<tr><td>--UNLOCK</td><td>allow reprogramming of bootloader</td></tr>
+<tr><td>--input_file <i>arg</i></td><td>input file</td></tr>
+</table>
+
+<p>For example, to download the firmware to a LED controller module, the typical usage on a Windows machine would be:
+
+<ul style="list-style: none;" class="folder">
+  <li>vr_refresh -c com7 led_controller-1.0.0.hex</li>
+  </ul>
+
+<p>The typically usage on a Linux host would be:</p>
+
+<ul style="list-style: none;" class="folder">
+  <li>vr_refresh -c /dev/ttyUSB0 led_controller-1.0.0.hex</li>
+  </ul>
+
+<p>By default vr_refresh will use BROADCAST transmissions to establish connections.  This behavior can be changed by using the -i or the -sn parameters.</p>
+
+<p><img src="../../required/images/icon_tip.gif">vr_refresh, like all VideoRay command line tools will output its usage options when run with the "-?" parameter.</p>
+
+<h2>vr_refresh Methods of Connection</h2>
+
+<p>There are two ways to establish a connection between vr_refresh and the module.<p>
+
+<h3>Power on Connection</h3>
+
+<p>When vr_refresh is run it will sit and wait for the initial announcement message sent by the module.  The modules use a randomized transmission to attempt to minimize collisions when there are multiple devices on the bus.  Since vr_refresh by default uses broadcasts, this means that if there are multiple devices connected and powered up at the same time it is a matter of chance as to which module will connect.  It is therefore recommend that either the -sn or -i parameters be used or only as single module be connected at a time when updating firmware.</p>
+
+<h3>Application Firmware Reboot Connection</h3>
+
+<p>When vr_refresh is run it will send a REBOOT message immediately (-i parameter applies).  If a module is connected, powered up, and accepts the REBOOT message from vr_refresh (either it is a broadcast message or the proper node id was passed in) the module will reboot and jump to the bootloader.  It should then connect as desired.</p>
+
+<h2>vr_refresh Output</h2>
+
+<p>vr_refresh will output status strings during operation.  Examples are given below:</p>
+
+<p>Waiting to connect (command line: <span class="folder">vr_refresh -c com7 -I 1</span>); response:</p>
+
+<ul style="list-style: none;" class="folder">
+  <li>INFO: Attempting connection to Node: 1 S/N: any</li>
+  </ul>
+
+<p>Successful connection (command line: <span class="folder">vr_refresh -c com7</span>); response:</p>
+
+<ul style="list-style: none;" class="folder">
+  <li>INFO: Attempting connection to Node: 255 S/N: any</li>
+  <li>INFO: Connected to Node: 5</li>
+  <li>INFO: Done</li>
+  </ul>
+
+<p>Successful connection VERBOSE mode (command line: <span class="folder">vr_refresh -c com7 --verbose</span>); response:</p>
+
+<ul style="list-style: none;" class="folder">
+  <li>INFO: Attempting connection to Node: 255 S/N: any</li>
+  <li>INFO: Connected to Node: 5</li>
+  <li>INFO: Boot Data
+    <ul style="list-style: none;" class="folder">
+      <li>Data version: 1</li>
+      <li>Device type: 131</li>
+      <li>Incept date: 2014-Nov-10 22:29:55</li>
+      <li>Serial number: LED0001</li>
+      <li>App Size: 0x9118</li>
+      <li>App crc: 0x23f766a8</li>
+      </ul>
+    </li>
+  <li>INFO: Done</li>
+  </ul>
+
+<p>Sample end of firmware update (command line: <span class="folder">vr_refresh -c com7 -verbose led_controller-1.0.0.hex</span>); response:</p>
+
+<ul style="list-style: none;" class="folder">
+  <li>INFO: Progress 90%</li>
+  <li>INFO: Erase 0xc400</li>
+  <li>INFO: Progress 91%</li>
+  <li>INFO: Progress 92%</li>
+  <li>INFO: Progress 93%</li>
+  <li>INFO: Erase 0xc800</li>
+  <li>INFO: Progress 94%</li>
+  <li>INFO: Progress 95%</li>
+  <li>INFO: Progress 96%</li>
+  <li>INFO: Erase 0xcc00</li>
+  <li>INFO: Progress 97%</li>
+  <li>INFO: Progress 98%</li>
+  <li>INFO: Erase 0xd000</li>
+  <li>INFO: Progress 99%</li>
+  <li>INFO: Progress 100%</li>
+  <li>INFO: Done</li>
+  </ul>

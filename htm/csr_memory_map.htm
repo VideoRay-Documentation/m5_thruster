@@ -1,0 +1,75 @@
+<h1>CSR Memory Map</h1>
+
+<p>In normal operation the device implements a CSR type memory mapped data space.  The VideoRay CSR comms protocol is used for communication.   See https://github.com/videoray/VRCommsProtocol_doc/raw/master/VR_CSR_Communication_Protocol.doc for more information on the base binary protocol.</p>
+
+<table>
+<tr><th>Register</th><th>Function</th><th>Comments</th></tr>
+<tr><td>0x0</td><td>float rpm_target</td><td>rpm (RW) NOT USED YET</td></tr>
+<tr><td>0x4</td><td>float pwr_target</td><td>-1 to 1 (RW)</td></tr>
+<tr><td>0x8</td><td>float rpm</td><td>rpm (R)</td></tr>
+<tr><td>0xc</td><td>float bus_v</td><td>volts (R)</td></tr>
+<tr><td>0x10</td><td>float bus_i</td><td>amps (R)</td></tr>
+<tr><td>0x14</td><td>uint32_t fault</td><td>fault flags (R)</td></tr>
+<tr><td>0x18</td><td>float temp</td><td>deg C (R)</td></tr>
+<tr><td>0x1c</td><td>float pwr_actual</td><td>-1 to 1 (R)</td></tr>
+<tr><td>0x20</td><td>float rpm_P</td><td>0 to 1 (R) NOT USED YET</td></tr>
+<tr><td>0x24</td><td>float rpm_I</td><td>0 to 1 (R) NOT USED YET</td></tr>
+<tr><td>0x28</td><td>float rpm_D</td><td>0 to 1 (R) NOT USED YET</td></tr>
+<tr><td>0x2c</td><td>RESERVED</td><td></td></tr>
+<tr><td>0x4c</td><td>uint16_t thruster_ID</td><td>ordinal (RW)</td></tr>
+<tr><td>0x4e</td><td>RESERVED</td><td></td></tr>
+<tr><td>0x50</td><td>uint8_t operation_flags</td><td></td></tr>
+<tr><td>0x51</td><td>RESERVED</td><td></td></tr>
+<tr><td>0x54</td><td>uint32_t motor_fault_interlock</td><td>password (RW)</td></tr>
+<tr><td>0x58</td><td>RESERVED</td><td></td></tr>
+<tr><td>0x60</td><td>uint8_t motor_control_flags</td><td>Bitfield (RW)</td></tr>
+<tr><td>0x61</td><td>uint8_t poles</td><td>count (RW)</td></tr>
+<tr><td>0x62</td><td>uint8_t pwm_deadband</td><td>ticks (RW)</td></tr>
+<tr><td>0x63</td><td>RESERVED</td><td></td></tr>
+<tr><td>0x64</td><td>float commutation_threshold</td><td>0 to 1 (RW)</td></tr>
+<tr><td>0x68</td><td>uint32_t commutation_loss_timeout</td><td>ms (RW)</td></tr>
+<tr><td>0x6c</td><td>float startup_dutycycle</td><td>0 to 1 (RW)</td></tr>
+<tr><td>0x70</td><td>uint16_t startup_initial_rpm</td><td>rpm (RW)</td></tr>
+<tr><td>0x72</td><td>uint16_t startup_final_rpm</td><td>rpm (RW)</td></tr>
+<tr><td>0x74</td><td>float startup_duration</td><td>mS (RW)</td></tr>
+<tr><td>0x78</td><td>float deadband_neg</td><td>-1 to 0 (RW)</td></tr>
+<tr><td>0x7c</td><td>float deadband_pos</td><td>0 to 1 (RW)</td></tr>
+<tr><td>0x80</td><td>float limit_neg</td><td>-1 to 0 (RW)</td></tr>
+<tr><td>0x84</td><td>float limit_pos</td><td>0 to 1 (RW)</td></tr>
+<tr><td>0x88</td><td>float slew_rate_up</td><td>delta/mS (RW)</td></tr>
+<tr><td>0x8c</td><td>float slew_rate_down</td><td>delta/mS (RW)</td></tr>
+<tr><td>0x90</td><td>float rpm_kP</td><td>-1 to 1 (RW) NOT USED YET</td></tr>
+<tr><td>0x94</td><td>float rpm_kI</td><td>-1 to 1 (RW) NOT USED YET</td></tr>
+<tr><td>0x98</td><td>float rpm_kD</td><td>-1 to 1 (RW) NOT USED YET</td></tr>
+<tr><td>0x9c</td><td>RESERVED</td><td></td></tr>
+<tr><td>0xa4</td><td>uint8_t fault_control</td><td>flag (RW)</td></tr>
+<tr><td>0xa5</td><td>uint8_t undervoltage_trigger</td><td>volts (RW)</td></tr>
+<tr><td>0xa6</td><td>uint8_t overvoltage_trigger</td><td>volts (RW)</td></tr>
+<tr><td>0xa7</td><td>uint8_t overcurrent_trigger</td><td>amps (RW)</td></tr>
+<tr><td>0xa8</td><td>uint8_t temp_trigger</td><td>deg C (RW)</td></tr>
+<tr><td>0xa9</td><td>uint8_t stall_count_max</td><td>count (RW)</td></tr>
+<tr><td>0xaa</td><td>RESERVED</td><td></td></tr>
+<tr><td>0xac</td><td>uint32_t undervoltage_err_cnt</td><td>count (R)</td></tr>
+<tr><td>0xb0</td><td>uint32_t overvoltage_err_cnt</td><td>count (R)</td></tr>
+<tr><td>0xb4</td><td>uint32_t overcurrent_err_cnt</td><td>count (R)</td></tr>
+<tr><td>0xb8</td><td>uint32_t temp_err_cnt</td><td>count (R)</td></tr>
+<tr><td>0xbc</td><td>uint32_t stall_err_cnt</td><td>count (R)</td></tr>
+<tr><td>0xc0</td><td>RESERVED</td><td></td></tr>
+<tr><td>0xd8</td><td>uint32_t comms_sync1_err_cnt</td><td>count (R)</td></tr>
+<tr><td>0xdc</td><td>uint32_t comms_sync2_err_cnt</td><td>count (R)</td></tr>
+<tr><td>0xe0</td><td>uint32_t comms_headerxsum_err_cnt</td><td>count (R)</td></tr>
+<tr><td>0xe4</td><td>uint32_t comms_overrun_err_cnt</td><td>count (R)</td></tr>
+<tr><td>0xe8</td><td>uint32_t comms_payloadxsum_err_cnt</td><td>count (R)</td></tr>
+<tr><td>0xec</td><td>uint16_t comms_err_flag	</td></tr>
+<tr><td>0xee</td><td>uint16_t save_settings</td><td>code (W)</td></tr>
+<tr><td>0xf0</td><td>uint32_t custom_command</td><td>(W) Special Register</td></tr>
+<tr><td>0xf4</td><td>uint32_t FACTORY_SERVICE_DATA</td><td>(R) Device specific service data</td></tr>
+<tr><td>0xf8</td><td>uint16_t CONFIG_DATA_SIZE</td><td>(R)</td></tr>
+<tr><td>0xfa</td><td>uint8_t CONFIG_DATA</td><td>(R) Special Register</td></tr>
+<tr><td>0xfb</td><td>uint8_t FIRMWARE_VERSION</td><td>(R) Special Register</td></tr>
+<tr><td>0xfc</td><td>uint8_t NODE_ID</td><td>(RW) Special Register</td></tr>
+<tr><td>0xfd</td><td>uint8_t GROUP_ID</td><td>(RW) Special Register</td></tr>
+<tr><td>0xfe</td><td>uint16_t UTILITY</td><td>(W) Special Register</td></tr>
+</table>
+
+<p></p>

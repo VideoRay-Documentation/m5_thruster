@@ -1,0 +1,28 @@
+<h1>LED Blink Patterns</h1>
+
+<p>The POWER LED is a constant on RED when power is applied.</p>
+
+<p>The other indicator is a three color LED package, which is made up of the STATUS led (blue), the MOTOR led (green), and the FAULT led (RED).  In diagnostic mode the STATUS and FAULT LEDs are turned ON.
+
+<p>The STATUS LED is blue and has several blink patterns:</p>
+
+<ul>
+  <li>Bootloader:
+    <ul>
+      <li>Three blinks on startup</li>
+      <li>Rapid blink if no valid application is found, or if commanded to stay in the bootloader.</li>
+      </ul>
+    </li>
+
+  <li>Normal Operation:
+    <ul>
+      <li>Three blinks on application startup</li>
+      <li>One blink per second</li>
+      <li>Fast triple blink when a CSR communication packet is accepted</li>
+      </ul>
+    </li>
+  </ul>
+
+<p>THE MOTOR LED is green and blink at a rate proportional to the RPM of the motor.</p>
+
+<p>The FAULT LED is red and is active when a fault condition has been detected.</p>
