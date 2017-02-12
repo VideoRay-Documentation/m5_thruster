@@ -1,0 +1,4 @@
+!INCLUDE,m5_common/equipment.txt,1
+!INCLUDE,software.txt,1
+!INCLUDE,operations.txt,1
+!INCLUDE,maintenance.txt,1

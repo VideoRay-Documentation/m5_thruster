@@ -1,4 +1,0 @@
-*,Software Management,,software_management.htm,,,
-**,Bootloader Operation,,bootloader.htm,,,
-**,Firmware Updates,,firmware_updates.htm,,,
-***,Using vr_refresh,,using_vr_refresh.htm,,,

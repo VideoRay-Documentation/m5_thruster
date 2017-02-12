@@ -1,33 +1,21 @@
 #Document Commands
-!PRODUCT,M5 Thruster
-!VERSION,1.00.01
+!PRODUCT,M5 Thruster Module
+!VERSION,1.01.00
+!HEADER_BREAK,<br />
 !DOC_TYPE,Operator's Manual
 !OUT_DIR,m5_thruster/
-!VALID_PAGES,
+!INCLUDED_PAGES,
 !VALID_TEXT,
 !TEMPLATE_COVER,required/htm/template_index_print.htm,index_print.htm
 
 #Documentation Generation
 !INCLUDE,required/intro_.txt,1
 !INCLUDE,required/overview_.txt,1
-**,Specifications,,specifications_.htm,,,
 
-*,Equipment Guide,,equipment_.htm,,,
-**,Physical Mounting,,equipment_mounting.htm,,,
-**,Electrical Connections,,equipment_connections.htm,,,
+!INCLUDE,m5_common/equipment.txt,1
+!INCLUDE,software.txt,1
+!INCLUDE,operations.txt,1
+!INCLUDE,maintenance.txt,1
 
-*,Software Guide,,software_.htm,,,
-**,Motor Controller Firmware,,motor_controller_firmware.htm,,,
-***,CSR Memory Map,,csr_memory_map.htm,,,
-***,CSR Field Definitions,,csr_field_definitions.htm,,,
-***,Commands and Responses,,commands_responses.htm,,,
-***,Diagnostics / Test Mode,,diagnostics_test_mode.htm,,,
-****,Motor Activation Mode,,motor_activation_mode.htm,,,
-****,Configuration Mode,,configuration_mode.htm,,,
-!INCLUDE,software_management.txt,2
-**,Example Thruster Code,,thruster_py.htm,,,
-
-*,Operations Guide,,operations_.htm,,,
-**,LED Blink Patterns,,led_blink_patterns.htm,,,
-
-*,Maintenance Guide,,maintenance_.htm,,,
+v*,Reference Documents,,nul,,,
+v**,External Step File,nul,../zip/m5sThrusterExternal.zip,,,

@@ -1,0 +1,3 @@
+*,Equipment Guide,,equipment_.htm,,,
+#**,Physical Mounting,,equipment_mounting.htm,,,
+**,Electrical Connections,,equipment_connections.htm,,,

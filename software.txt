@@ -1,0 +1,12 @@
+*,Software Guide,,software_.htm,,,
+**,Motor Controller Firmware,,motor_controller_firmware.htm,,,
+***,CSR Memory Map,,csr_memory_map.htm,,,
+***,CSR Field Definitions,,csr_field_definitions.htm,,,
+***,Commands and Responses,,commands_responses.htm,,,
+***,Diagnostics / Test Mode,,diagnostics_test_mode.htm,,,
+****,Motor Activation Mode,,motor_activation_mode.htm,,,
+****,Configuration Mode,,configuration_mode.htm,,,
+
+!INCLUDE,m5_common/software_management.txt,2
+
+**,Example Thruster Code,,thruster_py.htm,,,
